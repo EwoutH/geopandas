@@ -8,6 +8,10 @@ on:
   schedule:
     - cron: "0 0 * * *"
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   Linting:
     runs-on: ubuntu-latest
@@ -64,11 +68,9 @@ jobs:
           activate-conda: false
 
       - name: Install Env
-        shell: bash
         run: conda env create -f ${{ matrix.env }}
 
       - name: Check and Log Environment
-        shell: bash
         run: |
           source activate test
           python -V
@@ -87,7 +89,6 @@ jobs:
           fi
 
       - name: Test without PyGEOS
-        shell: bash
         env:
           USE_PYGEOS: 0
         run: |
@@ -95,7 +96,6 @@ jobs:
           pytest -v -r s -n auto --color=yes --cov=geopandas --cov-append --cov-report term-missing --cov-report xml geopandas/
 
       - name: Test with PyGEOS
-        shell: bash
         if: env.HAS_PYGEOS == 1
         env:
           USE_PYGEOS: 1
@@ -104,7 +104,6 @@ jobs:
           pytest -v -r s -n auto --color=yes --cov=geopandas --cov-append --cov-report term-missing --cov-report xml geopandas/
 
       - name: Test with PostGIS
-        shell: bash
         if: contains(matrix.env, '38-latest-conda-forge.yaml') && contains(matrix.os, 'ubuntu')
         env:
           PGUSER: postgres
@@ -117,7 +116,6 @@ jobs:
           pytest -v -r s --color=yes --cov=geopandas --cov-append --cov-report term-missing --cov-report xml geopandas/io/tests/test_sql.py | tee /dev/stderr | if grep SKIPPED >/dev/null;then echo "TESTS SKIPPED, FAILING" && exit 1;fi
 
       - name: Test docstrings
-        shell: bash
         if: contains(matrix.env, '38-latest-conda-forge.yaml') && contains(matrix.os, 'ubuntu')
         env:
           USE_PYGEOS: 1
