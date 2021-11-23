@@ -2,9 +2,9 @@ name: Tests
 
 on:
   push:
-    branches: [master, 0.**]
+    #branches: [master, 0.**]
   pull_request:
-    branches: [master, 0.**]
+    #branches: [master, 0.**]
   schedule:
     - cron: "0 0 * * *"
 
