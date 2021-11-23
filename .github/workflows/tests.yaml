@@ -78,10 +78,10 @@ jobs:
         run: |
           python -V
           python -c "import geopandas; geopandas.show_versions();"
-          conda info
+          mamba info
           # save conda list to file and print out
           # so that we can do the HAS_PYGEOS check without calling conda again
-          conda list 2>&1 | tee conda.txt
+          mamba list 2>&1 | tee conda.txt
           if ( cat conda.txt | grep -q pygeos  )
           then
             echo "Setting HAS_PYGEOS=1"
@@ -112,7 +112,7 @@ jobs:
           PGHOST: "127.0.0.1"
           PGPORT: 5432
         run: |
-          conda install postgis -c conda-forge
+          mamba install postgis -c conda-forge
           sh ci/scripts/setup_postgres.sh
           pytest -v -r s --color=yes --cov=geopandas --cov-append --cov-report term-missing --cov-report xml geopandas/io/tests/test_sql.py | tee /dev/stderr | if grep SKIPPED >/dev/null;then echo "TESTS SKIPPED, FAILING" && exit 1;fi
 
