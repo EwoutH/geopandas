@@ -70,6 +70,7 @@ jobs:
       - name: Setup Conda
         uses: conda-incubator/setup-miniconda@v2
         with:
+          auto-update-conda: true
           environment-file: ${{ matrix.env }}
 
       - name: Check and Log Environment
