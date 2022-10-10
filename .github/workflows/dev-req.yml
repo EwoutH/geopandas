@@ -21,6 +21,7 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - run: pip install --upgrade pip
+    - run: sudo apt-get install gdal-bin
     - run: pip install -r requirements-dev.txt
 
   macos:
