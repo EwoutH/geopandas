@@ -22,7 +22,7 @@ jobs:
     - run: pip install -r requirements-dev.txt
 
   macos:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     strategy:
       fail-fast: false
       matrix:
@@ -33,12 +33,11 @@ jobs:
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
     - run: pip install --upgrade pip
-    - run: brew install gdal
-    - run: brew install fiona
+    - run: brew install gdal fiona
     - run: pip install -r requirements-dev.txt
 
   windows:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
@@ -49,6 +48,5 @@ jobs:
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
     - run: pip install --upgrade pip pipwin
-    - run: pipwin install gdal
-    - run: pipwin install fiona
+    - run: pipwin install gdal fiona
     - run: pip install -r requirements-dev.txt
