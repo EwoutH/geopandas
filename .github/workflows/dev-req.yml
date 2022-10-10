@@ -7,12 +7,11 @@ on:
     - cron: '0 6 * * 1'
 
 jobs:
-  build:
-    runs-on: ${{ matrix.os }}
+  ubuntu:
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: ["3.10", "3.11-dev"]
 
     steps:
@@ -20,4 +19,34 @@ jobs:
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
     - run: pip install --upgrade pip
+    - run: pip install -r requirements-dev.txt
+
+  macos:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11-dev"]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+    - run: pip install --upgrade pip
+    - run: brew install gdal fiona
+    - run: pip install -r requirements-dev.txt
+
+  windows:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11-dev"]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+    - run: pip install --upgrade pip pipwin
+    - run: pipwin install gdal fiona
     - run: pip install -r requirements-dev.txt
