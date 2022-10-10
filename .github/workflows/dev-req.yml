@@ -33,7 +33,7 @@ jobs:
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
     - run: pip install --upgrade pip
-    - run: brew install gdal fiona
+    - run: brew install gdal
     - run: pip install -r requirements-dev.txt
 
   windows:
