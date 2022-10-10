@@ -33,7 +33,8 @@ jobs:
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
     - run: pip install --upgrade pip
-    - run: brew install gdal fiona
+    - run: brew install gdal
+    - run: brew install fiona
     - run: pip install -r requirements-dev.txt
 
   windows:
@@ -48,5 +49,6 @@ jobs:
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
     - run: pip install --upgrade pip pipwin
-    - run: pipwin install gdal fiona
+    - run: pipwin install gdal
+    - run: pipwin install fiona
     - run: pip install -r requirements-dev.txt
