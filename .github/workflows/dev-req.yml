@@ -47,6 +47,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
-    - run: pip install --upgrade pip pipwin
-    - run: pipwin install gdal fiona
+    - run: pip install --upgrade pippipwin
+    - run: pipwin install gdal
+    - run: pipwin install fiona
     - run: pip install -r requirements-dev.txt
