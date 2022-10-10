@@ -53,7 +53,7 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
-    - run: pip install --upgrade pippipwin
+    - run: pip install --upgrade pip pipwin
     - run: pipwin install gdal
     - run: pipwin install fiona
     - run: pip install -r requirements-dev.txt
